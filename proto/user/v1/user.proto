@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package user.v1;
+
+option go_package = "pkg/pb/user;userpb";
+
+import "google/api/annotations.proto";
+
+// =====================
+// Messages
+// =====================
+
+// HelloRequest is used to demonstrate a simple greet endpoint.
+message HelloRequest {
+  string name = 1;
+}
+
+// HelloResponse returns a greeting message.
+message HelloResponse {
+  string message = 1;
+}
+
+// User describes the user payload shared between gRPC and REST.
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// CREATE
+// CreateUserRequest is the request payload for creating a new user.
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+// CreateUserResponse returns the created user.
+message CreateUserResponse {
+  User user = 1;
+}
+
+// READ
+// GetUserRequest is used to retrieve a user by ID.
+message GetUserRequest {
+  int64 id = 1;
+}
+
+// GetUserResponse returns the requested user.
+message GetUserResponse {
+  User user = 1;
+}
+
+// UPDATE
+// UpdateUserRequest carries fields for updating an existing user.
+message UpdateUserRequest {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// UpdateUserResponse returns the updated user.
+message UpdateUserResponse {
+  User user = 1;
+}
+
+// DELETE
+// DeleteUserRequest identifies the user to delete.
+message DeleteUserRequest {
+  int64 id = 1;
+}
+
+// DeleteUserResponse contains a deletion confirmation message.
+message DeleteUserResponse {
+  string message = 1;
+}
+
+// =====================
+// Service
+// =====================
+
+service UserService {
+
+  // Greetings is a sample health / hello endpoint.
+  rpc Greetings(HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      get: "/v1/hello/{name}"
+    };
+  }
+
+  // CreateUser creates a new user record.
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/users"
+      body: "*"
+    };
+  }
+
+  // GetUser fetches a user by ID.
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/{id}"
+    };
+  }
+
+  // UpdateUser updates an existing user.
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      put: "/v1/users/{id}"
+      body: "*"
+    };
+  }
+
+  // DeleteUser removes a user by ID.
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {
+    option (google.api.http) = {
+      delete: "/v1/users/{id}"
+    };
+  }
+}
