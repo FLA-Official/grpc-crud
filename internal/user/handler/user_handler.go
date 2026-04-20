@@ -26,16 +26,16 @@ func (h *UserHandler) Greetings(ctx context.Context, req *userpb.HelloRequest) (
 
 // CreateUser handles the gRPC CreateUser request and forwards it to the service layer.
 func (h *UserHandler) CreateUser(ctx context.Context, req *userpb.CreateUserRequest) (*userpb.CreateUserResponse, error) {
-	user, err := h.userService.CreateUser(req.Name, req.Email)
+	user, err := h.userService.CreateUser(req.UserName, req.Email, req.Password, req.FullName)
 	if err != nil {
 		return nil, err
 	}
 
 	return &userpb.CreateUserResponse{
 		User: &userpb.User{
-			Id:    user.ID,
-			Name:  user.Name,
-			Email: user.Email,
+			Id:       user.ID,
+			UserName: user.UserName,
+			Email:    user.Email,
 		},
 	}, nil
 }
@@ -49,25 +49,25 @@ func (h *UserHandler) GetUser(ctx context.Context, req *userpb.GetUserRequest) (
 
 	return &userpb.GetUserResponse{
 		User: &userpb.User{
-			Id:    user.ID,
-			Name:  user.Name,
-			Email: user.Email,
+			Id:       user.ID,
+			UserName: user.UserName,
+			Email:    user.Email,
 		},
 	}, nil
 }
 
 // UpdateUser handles the gRPC UpdateUser request and returns the updated user.
 func (h *UserHandler) UpdateUser(ctx context.Context, req *userpb.UpdateUserRequest) (*userpb.UpdateUserResponse, error) {
-	user, err := h.userService.UpdateUser(req.Id, req.Name, req.Email)
+	user, err := h.userService.UpdateUser(req.Id, req.UserName, req.Email, req.Password, req.FullName)
 	if err != nil {
 		return nil, err
 	}
 
 	return &userpb.UpdateUserResponse{
 		User: &userpb.User{
-			Id:    user.ID,
-			Name:  user.Name,
-			Email: user.Email,
+			Id:       user.ID,
+			UserName: user.UserName,
+			Email:    user.Email,
 		},
 	}, nil
 }

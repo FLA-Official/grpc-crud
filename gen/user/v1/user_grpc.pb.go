@@ -30,7 +30,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	// Greetings is a sample health / hello endpoint.
+	// Greetings, a sample hello endpoint.
 	Greetings(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
 	// CreateUser creates a new user record.
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
@@ -104,7 +104,7 @@ func (c *userServiceClient) DeleteUser(ctx context.Context, in *DeleteUserReques
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
-	// Greetings is a sample health / hello endpoint.
+	// Greetings, a sample hello endpoint.
 	Greetings(context.Context, *HelloRequest) (*HelloResponse, error)
 	// CreateUser creates a new user record.
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)

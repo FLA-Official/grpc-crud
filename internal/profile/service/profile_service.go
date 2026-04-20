@@ -22,7 +22,7 @@ func (s *ProfileService) Create(ctx context.Context, p *model.Profile) error {
 	return s.repo.Create(p)
 }
 
-func (s *ProfileService) Get(ctx context.Context, userID string) (*model.Profile, error) {
+func (s *ProfileService) Get(ctx context.Context, userID int64) (*model.Profile, error) {
 	p, err := s.repo.Get(userID)
 	if err != nil {
 		return nil, errors.New("not found")
@@ -34,6 +34,6 @@ func (s *ProfileService) Update(ctx context.Context, p *model.Profile) error {
 	return s.repo.Update(p)
 }
 
-func (s *ProfileService) Delete(ctx context.Context, userID string) error {
+func (s *ProfileService) Delete(ctx context.Context, userID int64) error {
 	return s.repo.Delete(userID)
 }

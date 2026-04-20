@@ -23,10 +23,11 @@ const (
 
 type Profile struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
+	FullName      string                 `protobuf:"bytes,3,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Bio           string                 `protobuf:"bytes,5,opt,name=bio,proto3" json:"bio,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61,16 +62,23 @@ func (*Profile) Descriptor() ([]byte, []int) {
 	return file_proto_profile_v1_profile_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Profile) GetUserId() string {
+func (x *Profile) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *Profile) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *Profile) GetFullName() string {
+	if x != nil {
+		return x.FullName
 	}
 	return ""
 }
@@ -91,10 +99,11 @@ func (x *Profile) GetBio() string {
 
 type CreateProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
+	FullName      string                 `protobuf:"bytes,3,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	Email         string                 `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	Bio           string                 `protobuf:"bytes,5,opt,name=bio,proto3" json:"bio,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -129,16 +138,23 @@ func (*CreateProfileRequest) Descriptor() ([]byte, []int) {
 	return file_proto_profile_v1_profile_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateProfileRequest) GetUserId() string {
+func (x *CreateProfileRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateProfileRequest) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateProfileRequest) GetFullName() string {
+	if x != nil {
+		return x.FullName
 	}
 	return ""
 }
@@ -159,7 +175,7 @@ func (x *CreateProfileRequest) GetBio() string {
 
 type GetProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -194,18 +210,19 @@ func (*GetProfileRequest) Descriptor() ([]byte, []int) {
 	return file_proto_profile_v1_profile_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetProfileRequest) GetUserId() string {
+func (x *GetProfileRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 type UpdateProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Bio           string                 `protobuf:"bytes,3,opt,name=bio,proto3" json:"bio,omitempty"`
+	FullName      string                 `protobuf:"bytes,3,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	Bio           string                 `protobuf:"bytes,4,opt,name=bio,proto3" json:"bio,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -240,16 +257,23 @@ func (*UpdateProfileRequest) Descriptor() ([]byte, []int) {
 	return file_proto_profile_v1_profile_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *UpdateProfileRequest) GetUserId() string {
+func (x *UpdateProfileRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 func (x *UpdateProfileRequest) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetFullName() string {
+	if x != nil {
+		return x.FullName
 	}
 	return ""
 }
@@ -263,7 +287,7 @@ func (x *UpdateProfileRequest) GetBio() string {
 
 type DeleteProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -298,11 +322,11 @@ func (*DeleteProfileRequest) Descriptor() ([]byte, []int) {
 	return file_proto_profile_v1_profile_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DeleteProfileRequest) GetUserId() string {
+func (x *DeleteProfileRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
-	return ""
+	return 0
 }
 
 type ProfileResponse struct {
@@ -398,25 +422,28 @@ var File_proto_profile_v1_profile_proto protoreflect.FileDescriptor
 const file_proto_profile_v1_profile_proto_rawDesc = "" +
 	"\n" +
 	"\x1eproto/profile/v1/profile.proto\x12\n" +
-	"profile.v1\"^\n" +
+	"profile.v1\"{\n" +
 	"\aProfile\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\x12\x10\n" +
-	"\x03bio\x18\x04 \x01(\tR\x03bio\"k\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
+	"\tfull_name\x18\x03 \x01(\tR\bfullName\x12\x14\n" +
+	"\x05email\x18\x04 \x01(\tR\x05email\x12\x10\n" +
+	"\x03bio\x18\x05 \x01(\tR\x03bio\"\x88\x01\n" +
 	"\x14CreateProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\x12\x10\n" +
-	"\x03bio\x18\x04 \x01(\tR\x03bio\",\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
+	"\tfull_name\x18\x03 \x01(\tR\bfullName\x12\x14\n" +
+	"\x05email\x18\x04 \x01(\tR\x05email\x12\x10\n" +
+	"\x03bio\x18\x05 \x01(\tR\x03bio\",\n" +
 	"\x11GetProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"U\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"r\n" +
 	"\x14UpdateProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x10\n" +
-	"\x03bio\x18\x03 \x01(\tR\x03bio\"/\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
+	"\tfull_name\x18\x03 \x01(\tR\bfullName\x12\x10\n" +
+	"\x03bio\x18\x04 \x01(\tR\x03bio\"/\n" +
 	"\x14DeleteProfileRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"@\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"@\n" +
 	"\x0fProfileResponse\x12-\n" +
 	"\aprofile\x18\x01 \x01(\v2\x13.profile.v1.ProfileR\aprofile\"1\n" +
 	"\x15DeleteProfileResponse\x12\x18\n" +
@@ -426,7 +453,7 @@ const file_proto_profile_v1_profile_proto_rawDesc = "" +
 	"\n" +
 	"GetProfile\x12\x1d.profile.v1.GetProfileRequest\x1a\x1b.profile.v1.ProfileResponse\x12N\n" +
 	"\rUpdateProfile\x12 .profile.v1.UpdateProfileRequest\x1a\x1b.profile.v1.ProfileResponse\x12T\n" +
-	"\rDeleteProfile\x12 .profile.v1.DeleteProfileRequest\x1a!.profile.v1.DeleteProfileResponseB$Z\"grpc-crud/gen/profile/v1;profilev1b\x06proto3"
+	"\rDeleteProfile\x12 .profile.v1.DeleteProfileRequest\x1a!.profile.v1.DeleteProfileResponseB\x1aZ\x18gen/profile/v1;profilev1b\x06proto3"
 
 var (
 	file_proto_profile_v1_profile_proto_rawDescOnce sync.Once

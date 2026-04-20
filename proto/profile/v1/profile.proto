@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package profile.v1;
 
-option go_package = "grpc-crud/gen/profile/v1;profilev1";
+option go_package = "gen/profile/v1;profilev1";
 
 service ProfileService {
   rpc CreateProfile(CreateProfileRequest) returns (ProfileResponse);
@@ -12,31 +12,34 @@ service ProfileService {
 }
 
 message Profile {
-  string user_id = 1;
+  int64 user_id = 1;
   string name = 2;
-  string email = 3;
-  string bio = 4;
+  string full_name = 3;
+  string email = 4;
+  string bio = 5;
 }
 
 message CreateProfileRequest {
-  string user_id = 1;
+  int64 user_id = 1;
   string name = 2;
-  string email = 3;
-  string bio = 4;
+  string full_name = 3;
+  string email = 4;
+  string bio = 5;
 }
 
 message GetProfileRequest {
-  string user_id = 1;
+  int64 user_id = 1;
 }
 
 message UpdateProfileRequest {
-  string user_id = 1;
+  int64 user_id = 1;
   string name = 2;
-  string bio = 3;
+  string full_name = 3;
+  string bio = 4;
 }
 
 message DeleteProfileRequest {
-  string user_id = 1;
+  int64 user_id = 1;
 }
 
 message ProfileResponse {

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user.v1;
 
-option go_package = "grpc-crud/gen/user/v1;userpb";
+option go_package = "gen/user/v1;userpb";
 
 import "google/api/annotations.proto";
 
@@ -23,15 +23,17 @@ message HelloResponse {
 // User describes the user payload shared between gRPC and REST.
 message User {
   int64 id = 1;
-  string name = 2;
+  string user_name = 2;
   string email = 3;
 }
 
 // CREATE
 // CreateUserRequest is the request payload for creating a new user.
 message CreateUserRequest {
-  string name = 1;
+  string user_name = 1;
   string email = 2;
+  string password = 3;
+  string full_name = 4;
 }
 
 // CreateUserResponse returns the created user.
@@ -54,8 +56,10 @@ message GetUserResponse {
 // UpdateUserRequest carries fields for updating an existing user.
 message UpdateUserRequest {
   int64 id = 1;
-  string name = 2;
+  string user_name = 2;
   string email = 3;
+  string password = 4;
+  string full_name = 5;
 }
 
 // UpdateUserResponse returns the updated user.

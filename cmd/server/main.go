@@ -11,8 +11,9 @@ import (
 
 	userpb "grpc-crud/gen/user/v1"
 	"grpc-crud/internal/config"
+	profileRepo "grpc-crud/internal/profile/repo"
 	"grpc-crud/internal/user/handler"
-	"grpc-crud/internal/user/repo"
+	userRepo "grpc-crud/internal/user/repo"
 	"grpc-crud/internal/user/service"
 )
 
@@ -37,8 +38,9 @@ func main() {
 	}
 
 	// Build the application layers: repository, service, and gRPC handler.
-	userRepo := repo.NewUserRepo(db)
-	userService := service.NewUserService(userRepo)
+	userRepo := userRepo.NewUserRepo(db)
+	profileRepo := profileRepo.NewProfileRepo(db)
+	userService := service.NewUserService(userRepo, profileRepo)
 	userHandler := handler.NewUserHandler(userService)
 
 	// Create gRPC server and register the generated service implementation.
