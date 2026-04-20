@@ -9,11 +9,11 @@ import (
 	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
 
+	userpb "grpc-crud/gen/user/v1"
 	"grpc-crud/internal/config"
 	"grpc-crud/internal/user/handler"
 	"grpc-crud/internal/user/repo"
 	"grpc-crud/internal/user/service"
-	"grpc-crud/pkg/pb/userpb"
 )
 
 func main() {

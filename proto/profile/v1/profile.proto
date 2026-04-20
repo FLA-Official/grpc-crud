@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package profile.v1;
+
+option go_package = "grpc-crud/gen/profile/v1;profilev1";
+
+service ProfileService {
+  rpc CreateProfile(CreateProfileRequest) returns (ProfileResponse);
+  rpc GetProfile(GetProfileRequest) returns (ProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (ProfileResponse);
+  rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse);
+}
+
+message Profile {
+  string user_id = 1;
+  string name = 2;
+  string email = 3;
+  string bio = 4;
+}
+
+message CreateProfileRequest {
+  string user_id = 1;
+  string name = 2;
+  string email = 3;
+  string bio = 4;
+}
+
+message GetProfileRequest {
+  string user_id = 1;
+}
+
+message UpdateProfileRequest {
+  string user_id = 1;
+  string name = 2;
+  string bio = 3;
+}
+
+message DeleteProfileRequest {
+  string user_id = 1;
+}
+
+message ProfileResponse {
+  Profile profile = 1;
+}
+
+message DeleteProfileResponse {
+  bool success = 1;
+}

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	userpb "grpc-crud/gen/user/v1"
 	"grpc-crud/internal/user/service"
-	"grpc-crud/pkg/pb/userpb"
 )
 
 type UserHandler struct {
@@ -15,6 +15,13 @@ type UserHandler struct {
 
 func NewUserHandler(us service.UserService) *UserHandler {
 	return &UserHandler{userService: us}
+}
+
+// Greetings handles the gRPC Greetings request and returns a hello message.
+func (h *UserHandler) Greetings(ctx context.Context, req *userpb.HelloRequest) (*userpb.HelloResponse, error) {
+	return &userpb.HelloResponse{
+		Message: fmt.Sprintf("Hello, %s!", req.Name),
+	}, nil
 }
 
 // CreateUser handles the gRPC CreateUser request and forwards it to the service layer.
