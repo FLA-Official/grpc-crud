@@ -1,26 +1,21 @@
-# Binaries for programs and plugins
+# Go build artifacts
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
-
-# Test binary, built with `go test -c`
 *.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-
-# Dependency directories (uncomment if using vendor)
-# vendor/
 
 # Go workspace file
 go.work
 
-# Environment variables
+# Dependency directories (uncomment if using vendor)
+# vendor/
+
+# Environment variable files
 .env
-.env.local
-.env.production
+.env.*
 
 # IDE and editor files
 .vscode/
@@ -38,28 +33,24 @@ go.work
 ehthumbs.db
 Thumbs.db
 
-# Logs
+# Logs and temporary files
 *.log
 logs/
-
-# Temporary files
 *.tmp
 *.temp
 
-# Build directories
+# Build output directories
 bin/
 dist/
 build/
+out/
 
-# Database files (if using local SQLite or similar)
+# Database files
 *.db
 *.sqlite
 *.sqlite3
 
-# Protobuf generated files (if regenerating)
-# pkg/pb/
-
-# Node modules (if any frontend)
+# Node module dependencies
 node_modules/
 
 # Coverage reports
@@ -69,3 +60,6 @@ coverage.xml
 # Miscellaneous
 *.bak
 *.backup
+*.pem
+*.key
+*.crt

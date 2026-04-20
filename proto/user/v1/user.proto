@@ -80,7 +80,7 @@ message DeleteUserResponse {
 
 service UserService {
 
-  // Greetings is a sample health / hello endpoint.
+  // Greetings, a sample hello endpoint.
   rpc Greetings(HelloRequest) returns (HelloResponse) {
     option (google.api.http) = {
       get: "/v1/hello/{name}"
