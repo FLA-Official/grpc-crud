@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	profilepb "grpc-crud/gen/profile/v1"
 	userpb "grpc-crud/gen/user/v1"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
@@ -19,14 +20,20 @@ func main() {
 	defer cancel()
 
 	// Create the HTTP request multiplexer for the gRPC Gateway.
-	mux := runtime.NewServeMux()
+	mux := runtime.NewServeMux(runtime.WithIncomingHeaderMatcher(func(key string) (string, bool) {
+		if key == "Authorization" {
+			return "authorization", true
+		}
+		return key, false
+	}),
+	)
 
 	// Use an insecure connection to the local gRPC server for development.
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 
-	// Register the generated gateway handler from the service definitions.
+	// Register the generated gateway handler for UserService.
 	err := userpb.RegisterUserServiceHandlerFromEndpoint(
 		ctx,
 		mux,
@@ -34,7 +41,18 @@ func main() {
 		opts,
 	)
 	if err != nil {
-		log.Fatalf("failed to register gateway: %v", err)
+		log.Fatalf("failed to register user service gateway: %v", err)
+	}
+
+	// Register the generated gateway handler for ProfileService.
+	err = profilepb.RegisterProfileServiceHandlerFromEndpoint(
+		ctx,
+		mux,
+		"localhost:50051",
+		opts,
+	)
+	if err != nil {
+		log.Fatalf("failed to register profile service gateway: %v", err)
 	}
 
 	// Start the HTTP server on port 8080 and forward REST calls to gRPC.

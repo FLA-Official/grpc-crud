@@ -2,13 +2,28 @@ syntax = "proto3";
 
 package profile.v1;
 
-option go_package = "gen/profile/v1;profilev1";
+option go_package = "profile/v1;profilev1";
+
+import "google/api/annotations.proto";
 
 service ProfileService {
   rpc CreateProfile(CreateProfileRequest) returns (ProfileResponse);
-  rpc GetProfile(GetProfileRequest) returns (ProfileResponse);
-  rpc UpdateProfile(UpdateProfileRequest) returns (ProfileResponse);
-  rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse);
+  rpc GetProfile(GetProfileRequest) returns (ProfileResponse) {
+    option (google.api.http) = {
+      get: "/v1/profiles/{user_id}"
+    };
+  }
+  rpc UpdateProfile(UpdateProfileRequest) returns (ProfileResponse) {
+    option (google.api.http) = {
+      put: "/v1/profiles/{user_id}"
+      body: "*"
+    };
+  }
+  rpc DeleteProfile(DeleteProfileRequest) returns (DeleteProfileResponse) {
+    option (google.api.http) = {
+      delete: "/v1/profiles/{user_id}"
+    };
+  }
 }
 
 message Profile {

@@ -32,10 +32,6 @@ func (p *Profile) Validate() error {
 		return errors.New("name must be at least 3 characters")
 	}
 
-	if p.FullName == "" {
-		return errors.New("full_name is required")
-	}
-
 	if p.Email == "" {
 		return errors.New("email is required")
 	}

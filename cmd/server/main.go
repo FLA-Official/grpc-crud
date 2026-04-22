@@ -9,9 +9,13 @@ import (
 	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
 
+	profilepb "grpc-crud/gen/profile/v1"
 	userpb "grpc-crud/gen/user/v1"
 	"grpc-crud/internal/config"
+	middleware "grpc-crud/internal/middlewares"
+	profileHandler "grpc-crud/internal/profile/handler"
 	profileRepo "grpc-crud/internal/profile/repo"
+	profileService "grpc-crud/internal/profile/service"
 	"grpc-crud/internal/user/handler"
 	userRepo "grpc-crud/internal/user/repo"
 	"grpc-crud/internal/user/service"
@@ -43,9 +47,18 @@ func main() {
 	userService := service.NewUserService(userRepo, profileRepo)
 	userHandler := handler.NewUserHandler(userService)
 
-	// Create gRPC server and register the generated service implementation.
-	server := grpc.NewServer()
+	// Build profile service layers.
+	profileSvc := profileService.NewProfileService(profileRepo)
+	profileHdlr := profileHandler.NewProfileHandler(profileSvc)
+
+	// Create gRPC server and register the generated service implementations.
+	server := grpc.NewServer(
+		grpc.UnaryInterceptor(
+			middleware.AuthInterceptor(cfg.JWTSecretKey),
+		),
+	)
 	userpb.RegisterUserServiceServer(server, userHandler)
+	profilepb.RegisterProfileServiceServer(server, profileHdlr)
 
 	// Listen for incoming gRPC connections on port 50051.
 	listener, err := net.Listen("tcp", ":50051")

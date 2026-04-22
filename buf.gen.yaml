@@ -2,8 +2,8 @@ version: v1
 
 plugins:
   - plugin: go
-    out: .
+    out: gen
   - plugin: go-grpc
-    out: .
+    out: gen
   - plugin: grpc-gateway
-    out: .
+    out: gen

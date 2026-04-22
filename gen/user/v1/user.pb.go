@@ -180,7 +180,6 @@ type CreateUserRequest struct {
 	UserName      string                 `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	FullName      string                 `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -232,13 +231,6 @@ func (x *CreateUserRequest) GetEmail() string {
 func (x *CreateUserRequest) GetPassword() string {
 	if x != nil {
 		return x.Password
-	}
-	return ""
-}
-
-func (x *CreateUserRequest) GetFullName() string {
-	if x != nil {
-		return x.FullName
 	}
 	return ""
 }
@@ -593,6 +585,111 @@ func (x *DeleteUserResponse) GetMessage() string {
 	return ""
 }
 
+// LOGIN
+type LoginRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginRequest) Reset() {
+	*x = LoginRequest{}
+	mi := &file_proto_user_v1_user_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginRequest) ProtoMessage() {}
+
+func (x *LoginRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_user_v1_user_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
+func (*LoginRequest) Descriptor() ([]byte, []int) {
+	return file_proto_user_v1_user_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *LoginRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type LoginResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *LoginResponse) Reset() {
+	*x = LoginResponse{}
+	mi := &file_proto_user_v1_user_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LoginResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LoginResponse) ProtoMessage() {}
+
+func (x *LoginResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_user_v1_user_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
+func (*LoginResponse) Descriptor() ([]byte, []int) {
+	return file_proto_user_v1_user_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *LoginResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
 var File_proto_user_v1_user_proto protoreflect.FileDescriptor
 
 const file_proto_user_v1_user_proto_rawDesc = "" +
@@ -605,12 +702,11 @@ const file_proto_user_v1_user_proto_rawDesc = "" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\"\x7f\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\"h\n" +
 	"\x11CreateUserRequest\x12\x1b\n" +
 	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x1b\n" +
-	"\tfull_name\x18\x04 \x01(\tR\bfullName\"7\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpasswordJ\x04\b\x04\x10\x05\"7\n" +
 	"\x12CreateUserResponse\x12!\n" +
 	"\x04user\x18\x01 \x01(\v2\r.user.v1.UserR\x04user\" \n" +
 	"\x0eGetUserRequest\x12\x0e\n" +
@@ -628,7 +724,13 @@ const file_proto_user_v1_user_proto_rawDesc = "" +
 	"\x11DeleteUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\".\n" +
 	"\x12DeleteUserResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\xd7\x03\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"@\n" +
+	"\fLoginRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"U\n" +
+	"\rLoginResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12!\n" +
+	"\x04user\x18\x02 \x01(\v2\r.user.v1.UserR\x04user2\xab\x04\n" +
 	"\vUserService\x12T\n" +
 	"\tGreetings\x12\x15.user.v1.HelloRequest\x1a\x16.user.v1.HelloResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/hello/{name}\x12[\n" +
 	"\n" +
@@ -637,7 +739,8 @@ const file_proto_user_v1_user_proto_rawDesc = "" +
 	"\n" +
 	"UpdateUser\x12\x1a.user.v1.UpdateUserRequest\x1a\x1b.user.v1.UpdateUserResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\x1a\x0e/v1/users/{id}\x12]\n" +
 	"\n" +
-	"DeleteUser\x12\x1a.user.v1.DeleteUserRequest\x1a\x1b.user.v1.DeleteUserResponse\"\x16\x82\xd3\xe4\x93\x02\x10*\x0e/v1/users/{id}B\x14Z\x12gen/user/v1;userpbb\x06proto3"
+	"DeleteUser\x12\x1a.user.v1.DeleteUserRequest\x1a\x1b.user.v1.DeleteUserResponse\"\x16\x82\xd3\xe4\x93\x02\x10*\x0e/v1/users/{id}\x12R\n" +
+	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/users/loginB\x10Z\x0euser/v1;userpbb\x06proto3"
 
 var (
 	file_proto_user_v1_user_proto_rawDescOnce sync.Once
@@ -651,7 +754,7 @@ func file_proto_user_v1_user_proto_rawDescGZIP() []byte {
 	return file_proto_user_v1_user_proto_rawDescData
 }
 
-var file_proto_user_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_proto_user_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_proto_user_v1_user_proto_goTypes = []any{
 	(*HelloRequest)(nil),       // 0: user.v1.HelloRequest
 	(*HelloResponse)(nil),      // 1: user.v1.HelloResponse
@@ -664,26 +767,31 @@ var file_proto_user_v1_user_proto_goTypes = []any{
 	(*UpdateUserResponse)(nil), // 8: user.v1.UpdateUserResponse
 	(*DeleteUserRequest)(nil),  // 9: user.v1.DeleteUserRequest
 	(*DeleteUserResponse)(nil), // 10: user.v1.DeleteUserResponse
+	(*LoginRequest)(nil),       // 11: user.v1.LoginRequest
+	(*LoginResponse)(nil),      // 12: user.v1.LoginResponse
 }
 var file_proto_user_v1_user_proto_depIdxs = []int32{
 	2,  // 0: user.v1.CreateUserResponse.user:type_name -> user.v1.User
 	2,  // 1: user.v1.GetUserResponse.user:type_name -> user.v1.User
 	2,  // 2: user.v1.UpdateUserResponse.user:type_name -> user.v1.User
-	0,  // 3: user.v1.UserService.Greetings:input_type -> user.v1.HelloRequest
-	3,  // 4: user.v1.UserService.CreateUser:input_type -> user.v1.CreateUserRequest
-	5,  // 5: user.v1.UserService.GetUser:input_type -> user.v1.GetUserRequest
-	7,  // 6: user.v1.UserService.UpdateUser:input_type -> user.v1.UpdateUserRequest
-	9,  // 7: user.v1.UserService.DeleteUser:input_type -> user.v1.DeleteUserRequest
-	1,  // 8: user.v1.UserService.Greetings:output_type -> user.v1.HelloResponse
-	4,  // 9: user.v1.UserService.CreateUser:output_type -> user.v1.CreateUserResponse
-	6,  // 10: user.v1.UserService.GetUser:output_type -> user.v1.GetUserResponse
-	8,  // 11: user.v1.UserService.UpdateUser:output_type -> user.v1.UpdateUserResponse
-	10, // 12: user.v1.UserService.DeleteUser:output_type -> user.v1.DeleteUserResponse
-	8,  // [8:13] is the sub-list for method output_type
-	3,  // [3:8] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	2,  // 3: user.v1.LoginResponse.user:type_name -> user.v1.User
+	0,  // 4: user.v1.UserService.Greetings:input_type -> user.v1.HelloRequest
+	3,  // 5: user.v1.UserService.CreateUser:input_type -> user.v1.CreateUserRequest
+	5,  // 6: user.v1.UserService.GetUser:input_type -> user.v1.GetUserRequest
+	7,  // 7: user.v1.UserService.UpdateUser:input_type -> user.v1.UpdateUserRequest
+	9,  // 8: user.v1.UserService.DeleteUser:input_type -> user.v1.DeleteUserRequest
+	11, // 9: user.v1.UserService.Login:input_type -> user.v1.LoginRequest
+	1,  // 10: user.v1.UserService.Greetings:output_type -> user.v1.HelloResponse
+	4,  // 11: user.v1.UserService.CreateUser:output_type -> user.v1.CreateUserResponse
+	6,  // 12: user.v1.UserService.GetUser:output_type -> user.v1.GetUserResponse
+	8,  // 13: user.v1.UserService.UpdateUser:output_type -> user.v1.UpdateUserResponse
+	10, // 14: user.v1.UserService.DeleteUser:output_type -> user.v1.DeleteUserResponse
+	12, // 15: user.v1.UserService.Login:output_type -> user.v1.LoginResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_user_v1_user_proto_init() }
@@ -697,7 +805,7 @@ func file_proto_user_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_user_v1_user_proto_rawDesc), len(file_proto_user_v1_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

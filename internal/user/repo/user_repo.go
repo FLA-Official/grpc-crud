@@ -11,6 +11,7 @@ type UserRepo interface {
 	GetByID(id int64) (*model.User, error)
 	Update(user *model.User) error
 	Delete(id int64) error
+	Find(email string) (*model.User, error)
 }
 
 type userRepo struct {
@@ -30,7 +31,8 @@ func (r *userRepo) Create(user *model.User) error {
 // GetByID fetches a user by primary key from the users table.
 func (r *userRepo) GetByID(id int64) (*model.User, error) {
 	user := &model.User{}
-	err := r.db.Get(user, "SELECT id, user_name, email, password FROM users WHERE id=$1", id)
+	query := "SELECT id, user_name, email, password FROM users WHERE id=$1"
+	err := r.db.Get(user, query, id)
 	if err != nil {
 		return nil, err
 	}
@@ -49,4 +51,15 @@ func (r *userRepo) Delete(id int64) error {
 	query := `DELETE FROM users WHERE id=$1`
 	_, err := r.db.Exec(query, id)
 	return err
+}
+
+// Find retrieves a user by email from the users table.
+func (r *userRepo) Find(email string) (*model.User, error) {
+	user := &model.User{}
+	query := "SELECT id, user_name, email, password FROM users WHERE email=$1"
+	err := r.db.Get(user, query, email)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }

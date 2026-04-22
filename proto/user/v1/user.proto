@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user.v1;
 
-option go_package = "gen/user/v1;userpb";
+option go_package = "user/v1;userpb";
 
 import "google/api/annotations.proto";
 
@@ -33,7 +33,7 @@ message CreateUserRequest {
   string user_name = 1;
   string email = 2;
   string password = 3;
-  string full_name = 4;
+  reserved 4;
 }
 
 // CreateUserResponse returns the created user.
@@ -78,6 +78,17 @@ message DeleteUserResponse {
   string message = 1;
 }
 
+//LOGIN
+message LoginRequest{
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse{
+  string access_token = 1;
+  User user = 2;
+}
+
 // =====================
 // Service
 // =====================
@@ -120,4 +131,14 @@ service UserService {
       delete: "/v1/users/{id}"
     };
   }
+  //LOGIN  
+  rpc Login(LoginRequest) returns (LoginResponse){
+    option (google.api.http) = {
+      post: "/v1/users/login"
+      body: "*"
+    };
+  }
+
+    
+  
 }

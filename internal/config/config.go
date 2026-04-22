@@ -9,11 +9,12 @@ import (
 )
 
 type Config struct {
-	DBUser     string
-	DBPassword string
-	DBHost     string
-	DBPort     int
-	DBName     string
+	DBUser        string
+	DBPassword    string
+	DBHost        string
+	DBPort        int
+	DBName        string
+	JWTSecretKey  string
 }
 
 var configuration *Config
@@ -62,12 +63,19 @@ func loadConfig() {
 		os.Exit(1)
 	}
 
+	jwtsecret := os.Getenv("JWT_SECRET_KEY")
+	if jwtsecret == "" {
+		fmt.Println("JWT Secret Key is required")
+		os.Exit(1)
+	}
+
 	configuration = &Config{
-		DBUser:     dbusername,
-		DBPassword: dbpassword,
-		DBHost:     dbhost,
-		DBPort:     DBport,
-		DBName:     dbname,
+		DBUser:       dbusername,
+		DBPassword:   dbpassword,
+		DBHost:       dbhost,
+		DBPort:       DBport,
+		DBName:       dbname,
+		JWTSecretKey: jwtsecret,
 	}
 }
 

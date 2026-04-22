@@ -7,6 +7,7 @@
 package profilev1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -422,7 +423,7 @@ var File_proto_profile_v1_profile_proto protoreflect.FileDescriptor
 const file_proto_profile_v1_profile_proto_rawDesc = "" +
 	"\n" +
 	"\x1eproto/profile/v1/profile.proto\x12\n" +
-	"profile.v1\"{\n" +
+	"profile.v1\x1a\x1cgoogle/api/annotations.proto\"{\n" +
 	"\aProfile\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -447,13 +448,13 @@ const file_proto_profile_v1_profile_proto_rawDesc = "" +
 	"\x0fProfileResponse\x12-\n" +
 	"\aprofile\x18\x01 \x01(\v2\x13.profile.v1.ProfileR\aprofile\"1\n" +
 	"\x15DeleteProfileResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xd0\x02\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xb3\x03\n" +
 	"\x0eProfileService\x12N\n" +
-	"\rCreateProfile\x12 .profile.v1.CreateProfileRequest\x1a\x1b.profile.v1.ProfileResponse\x12H\n" +
+	"\rCreateProfile\x12 .profile.v1.CreateProfileRequest\x1a\x1b.profile.v1.ProfileResponse\x12h\n" +
 	"\n" +
-	"GetProfile\x12\x1d.profile.v1.GetProfileRequest\x1a\x1b.profile.v1.ProfileResponse\x12N\n" +
-	"\rUpdateProfile\x12 .profile.v1.UpdateProfileRequest\x1a\x1b.profile.v1.ProfileResponse\x12T\n" +
-	"\rDeleteProfile\x12 .profile.v1.DeleteProfileRequest\x1a!.profile.v1.DeleteProfileResponseB\x1aZ\x18gen/profile/v1;profilev1b\x06proto3"
+	"GetProfile\x12\x1d.profile.v1.GetProfileRequest\x1a\x1b.profile.v1.ProfileResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/profiles/{user_id}\x12q\n" +
+	"\rUpdateProfile\x12 .profile.v1.UpdateProfileRequest\x1a\x1b.profile.v1.ProfileResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\x1a\x16/v1/profiles/{user_id}\x12t\n" +
+	"\rDeleteProfile\x12 .profile.v1.DeleteProfileRequest\x1a!.profile.v1.DeleteProfileResponse\"\x1e\x82\xd3\xe4\x93\x02\x18*\x16/v1/profiles/{user_id}B\x16Z\x14profile/v1;profilev1b\x06proto3"
 
 var (
 	file_proto_profile_v1_profile_proto_rawDescOnce sync.Once
