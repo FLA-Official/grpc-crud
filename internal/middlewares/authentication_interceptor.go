@@ -24,7 +24,7 @@ func AuthInterceptor(secret string) grpc.UnaryServerInterceptor {
 		handler grpc.UnaryHandler,
 	) (interface{}, error) {
 
-		// 🔓 Public routes (no auth)
+		//  Public routes (no auth)
 		public := map[string]bool{
 			"/user.v1.UserService/Login":      true,
 			"/user.v1.UserService/CreateUser": true,
@@ -34,7 +34,7 @@ func AuthInterceptor(secret string) grpc.UnaryServerInterceptor {
 			return handler(ctx, req)
 		}
 
-		// 📥 Read metadata
+		//  Read metadata
 		md, ok := metadata.FromIncomingContext(ctx)
 		if !ok {
 			return nil, status.Error(codes.Unauthenticated, "missing metadata")
@@ -54,7 +54,7 @@ func AuthInterceptor(secret string) grpc.UnaryServerInterceptor {
 			return nil, status.Error(codes.Unauthenticated, "invalid token")
 		}
 
-		// ✅ Store in context
+		//  Store in context
 		ctx = context.WithValue(ctx, UserContextKey, payload)
 
 		return handler(ctx, req)
